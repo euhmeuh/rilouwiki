@@ -1,0 +1,12 @@
+#editor textarea {
+  display: block;
+  width: 100%;
+}
+
+table, td, th {
+  border: 1px solid black;
+}
+
+td, th {
+  padding: 1em;
+}
