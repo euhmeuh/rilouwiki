@@ -178,21 +178,16 @@
       (delete-session db-conn (editor-id the-editor) id)
       (redirect/see-other "/session"))))
 
-(define static-root-path (path->string (build-path (current-server-root-path) "static")))
+;; === start the server ===
 
+(define static-root-path (path->string (build-path (current-server-root-path) "static")))
 (define current-database-path (make-parameter "database.sqlite"))
 
-(command-line
+(server-command-line
   #:once-each
-  [("-d" "--database") database-path
+  [("--database") database-path
    "Path to the SQLite database"
-   (current-database-path database-path)]
-  [("-c" "--cert") cert
-   "Specify the SSL server certificate"
-   (current-server-cert cert)]
-  [("-k" "--key") key
-   "Specify the SSL server key"
-   (current-server-key key)])
+   (current-database-path database-path)])
 
 (define db-conn (make-db-connection (current-database-path)))
 
